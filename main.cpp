@@ -19,7 +19,7 @@ int main()
 
         window.clear();
         points.update();
-        points.draw(window);
+        points.drawPoints(window);
         window.display();
     }
     return 0;

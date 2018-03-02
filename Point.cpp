@@ -7,21 +7,21 @@
 
 void Point::resetVector() {
     const double angle = (M_PI / 180) * (rand() % 360 - 180);
-    this->vector.x = (float) sin(angle);
-    this->vector.y = (float) cos(angle);
+    vector.x = (float) sin(angle);
+    vector.y = (float) cos(angle);
 }
 
 void Point::resetPosition() {
     const auto x = rand() % int(WIDTH * 0.6) + 0.2 * WIDTH;
     const auto y = rand() % int(HEIGHT * 0.6) + 0.2 * HEIGHT;
-    this->setPosition(x, y);
+    setPosition(x, y);
 }
 
 void Point::move() {
-    sf::Vector2f position = this->getPosition();
-    position.x += this->vector.x * this->speed;
-    position.y += this->vector.y * this->speed;
-    this->setPosition(position);
+    sf::Vector2f position = getPosition();
+    position.x += vector.x * speed;
+    position.y += vector.y * speed;
+    setPosition(position);
 }
 
 Point::Point() : CircleShape(1) {
@@ -31,29 +31,20 @@ Point::Point() : CircleShape(1) {
 }
 
 void Point::wallBounce() {
-    sf::Vector2f pos = this->getPosition();
-    sf::Vector2f vec = this->vector;
+    sf::Vector2f pos = getPosition();
 
-    if (pos.x >= WIDTH && vec.x > 0)
-        vec.x = -vec.x;
+    if (pos.x >= WIDTH && vector.x > 0)
+        vector.x = -vector.x;
 
-    if (pos.x <= 0 && vec.x < 0)
-        vec.x = -vec.x;
+    if (pos.x <= 0 && vector.x < 0)
+        vector.x = -vector.x;
 
-    if (pos.y >= HEIGHT && vec.y > 0)
-        vec.y = -vec.y;
+    if (pos.y >= HEIGHT && vector.y > 0)
+        vector.y = -vector.y;
 
-    if (pos.y <= 0 && vec.y < 0)
-        vec.y = -vec.y;
-
-    this->vector = vec;
+    if (pos.y <= 0 && vector.y < 0)
+        vector.y = -vector.y;
 }
 
-const double distance(const Point &a, const Point &b)
-{
-    sf::Vector2f aPos = a.getPosition();
-    sf::Vector2f bPos = b.getPosition();
-    return sqrt(pow(aPos.x - bPos.x, 2)+pow(aPos.y - bPos.y, 2));
-}
 
 

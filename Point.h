@@ -16,7 +16,6 @@ class Point : public sf::CircleShape {
 
 public:
     Point();
-
     void move();
     void wallBounce();
 };

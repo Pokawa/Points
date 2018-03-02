@@ -8,14 +8,18 @@
 
 #include <vector>
 #include "Point.h"
+#include "config.h"
 
 class Points {
     std::vector<Point> *list;
 
+    void drawLineBetween(sf::RenderWindow &, sf::Vector2f, sf::Vector2f);
+
+
 public:
     explicit Points(unsigned int a);
     void update();
-    void draw(sf::RenderWindow &window);
+    void drawPoints(sf::RenderWindow &window);
 
 
     ~Points();

@@ -7,5 +7,7 @@
 #define WIDTH 800
 #define HEIGHT 600
 #define POINTS 100
+#define MAX_DISTANCE 200
+#define DISTANCE_FULL_OPA MAX_DISTANCE * 0.3
 
 #endif //TESTS_CONFIG_H

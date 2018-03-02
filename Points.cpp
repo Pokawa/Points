@@ -5,25 +5,43 @@
 #include "Points.h"
 
 Points::Points(unsigned int a) {
-    this->list = new std::vector<Point>(a);
-    this->list->shrink_to_fit();
+    list = new std::vector<Point>(a);
+    list->shrink_to_fit();
 }
 
-void Points::draw(sf::RenderWindow &window) {
-    auto i = this->list->begin();
+void Points::drawPoints(sf::RenderWindow &window) {
+    auto i = list->begin();
     do {
         window.draw(*i);
-    } while (++i < this->list->end());
+        drawLineBetween(window,sf::Vector2f(sf::Mouse::getPosition(window)), i->getPosition());
+    } while (++i < list->end());
 }
 
 void Points::update() {
-    auto i = this->list->begin();
+    auto i = list->begin();
     do {
         i->wallBounce();
         i->move();
-    } while (++i < this->list->end());
+    } while (++i < list->end());
 }
 
 Points::~Points() {
-    delete this->list;
+    delete list;
 }
+
+void Points::drawLineBetween(sf::RenderWindow &window, sf::Vector2f a, sf::Vector2f b) {
+    const double x = a.x - b.x;
+    const double y = a.y - b.y;
+    const double dist = sqrt((x * x) + (y * y));
+
+    if (dist >= MAX_DISTANCE - 10)
+        return;
+
+    sf::Vertex vertex[2];
+    vertex[0].position = a;
+    vertex[1].position = b;
+    const auto alpha = sf::Uint8 (255 * (1. - dist/MAX_DISTANCE));
+    vertex[0].color = vertex[1].color = sf::Color(255,255,255,alpha);
+    window.draw(vertex, 2, sf::Lines);
+}
+
