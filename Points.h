@@ -14,12 +14,11 @@ class Points {
 
 public:
     explicit Points(unsigned int a);
-
-    Points();
-
-    void move();
-
+    void update();
     void draw(sf::RenderWindow &window);
+
+
+    ~Points();
 };
 
 

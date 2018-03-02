@@ -9,11 +9,6 @@ Points::Points(unsigned int a) {
     this->list->shrink_to_fit();
 }
 
-Points::Points() {
-    this->list = new std::vector<Point>(100);
-    this->list->shrink_to_fit();
-}
-
 void Points::draw(sf::RenderWindow &window) {
     auto i = this->list->begin();
     do {
@@ -21,9 +16,14 @@ void Points::draw(sf::RenderWindow &window) {
     } while (++i < this->list->end());
 }
 
-void Points::move() {
+void Points::update() {
     auto i = this->list->begin();
     do {
+        i->wallBounce();
         i->move();
     } while (++i < this->list->end());
+}
+
+Points::~Points() {
+    delete this->list;
 }

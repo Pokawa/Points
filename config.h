@@ -6,6 +6,6 @@
 #define TESTS_CONFIG_H
 #define WIDTH 800
 #define HEIGHT 600
-
+#define POINTS 100
 
 #endif //TESTS_CONFIG_H

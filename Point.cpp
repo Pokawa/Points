@@ -30,4 +30,30 @@ Point::Point() : CircleShape(1) {
     setFillColor(sf::Color::White);
 }
 
+void Point::wallBounce() {
+    sf::Vector2f pos = this->getPosition();
+    sf::Vector2f vec = this->vector;
+
+    if (pos.x >= WIDTH && vec.x > 0)
+        vec.x = -vec.x;
+
+    if (pos.x <= 0 && vec.x < 0)
+        vec.x = -vec.x;
+
+    if (pos.y >= HEIGHT && vec.y > 0)
+        vec.y = -vec.y;
+
+    if (pos.y <= 0 && vec.y < 0)
+        vec.y = -vec.y;
+
+    this->vector = vec;
+}
+
+const double distance(const Point &a, const Point &b)
+{
+    sf::Vector2f aPos = a.getPosition();
+    sf::Vector2f bPos = b.getPosition();
+    return sqrt(pow(aPos.x - bPos.x, 2)+pow(aPos.y - bPos.y, 2));
+}
+
 
