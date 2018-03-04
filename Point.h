@@ -9,7 +9,7 @@
 
 class Point : public sf::CircleShape {
     sf::Vector2f vector;
-    const float speed = 0.2;
+    static const float speed = 0.2;
 
     void resetVector();
     void resetPosition();
