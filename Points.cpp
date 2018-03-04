@@ -14,6 +14,13 @@ void Points::drawPoints(sf::RenderWindow &window) {
     do {
         window.draw(*i);
         drawLineBetween(window,sf::Vector2f(sf::Mouse::getPosition(window)), i->getPosition());
+
+        auto j = list->begin();
+        do
+        {
+            drawLineBetween(window, i->getPosition(), j->getPosition());
+        } while (++j < list->end());
+
     } while (++i < list->end());
 }
 
@@ -34,7 +41,7 @@ void Points::drawLineBetween(sf::RenderWindow &window, sf::Vector2f a, sf::Vecto
     const double y = a.y - b.y;
     const double dist = sqrt((x * x) + (y * y));
 
-    if (dist >= MAX_DISTANCE - 10)
+    if (dist >= MAX_DISTANCE || dist == 0)
         return;
 
     sf::Vertex vertex[2];
