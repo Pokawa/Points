@@ -9,16 +9,16 @@ Points::Points(unsigned int a) {
     list->shrink_to_fit();
 }
 
-void Points::drawPoints(sf::RenderWindow &window) {
+void Points::drawPoints() {
     auto i = list->begin();
     do {
-        window.draw(*i);
-        drawLineBetween(window,sf::Vector2f(sf::Mouse::getPosition(window)), i->getPosition());
+        window->draw(*i);
+        drawLineBetween(sf::Vector2f(sf::Mouse::getPosition(*window)), i->getPosition());
 
         auto j = list->begin();
         do
         {
-            drawLineBetween(window, i->getPosition(), j->getPosition());
+            drawLineBetween(i->getPosition(), j->getPosition());
         } while (++j < list->end());
 
     } while (++i < list->end());
@@ -36,7 +36,7 @@ Points::~Points() {
     delete list;
 }
 
-void Points::drawLineBetween(sf::RenderWindow &window, sf::Vector2f a, sf::Vector2f b) {
+void Points::drawLineBetween(sf::Vector2f a, sf::Vector2f b) {
     const double x = a.x - b.x;
     const double y = a.y - b.y;
     const double dist = sqrt((x * x) + (y * y));
@@ -49,6 +49,14 @@ void Points::drawLineBetween(sf::RenderWindow &window, sf::Vector2f a, sf::Vecto
     vertex[1].position = b;
     const auto alpha = sf::Uint8 (255 * (1. - dist/MAX_DISTANCE));
     vertex[0].color = vertex[1].color = sf::Color(255,255,255,alpha);
-    window.draw(vertex, 2, sf::Lines);
+    window->draw(vertex, 2, sf::Lines);
+}
+
+void Points::setWindow(sf::RenderWindow &window) {
+    this->window = &window;
+}
+
+Points::Points(unsigned int a, sf::RenderWindow &window) : Points(a){
+    setWindow(window);
 }
 

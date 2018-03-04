@@ -12,14 +12,17 @@
 
 class Points {
     std::vector<Point> *list;
+    sf::RenderWindow * window;
 
-    void drawLineBetween(sf::RenderWindow &, sf::Vector2f, sf::Vector2f);
+    void drawLineBetween(sf::Vector2f, sf::Vector2f);
 
 
 public:
     explicit Points(unsigned int a);
+    Points(unsigned int a, sf::RenderWindow &window);
+    void setWindow(sf::RenderWindow &window);
     void update();
-    void drawPoints(sf::RenderWindow &window);
+    void drawPoints();
 
 
     ~Points();

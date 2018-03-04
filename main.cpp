@@ -7,7 +7,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML");
     srand((unsigned)(time(nullptr)));
-    Points points(POINTS);
+    Points points(POINTS, window);
     while (window.isOpen())
     {
         sf::Event event{};
@@ -19,7 +19,7 @@ int main()
 
         window.clear();
         points.update();
-        points.drawPoints(window);
+        points.drawPoints();
         window.display();
     }
     return 0;
