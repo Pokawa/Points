@@ -9,14 +9,13 @@
 
 class Point : public sf::CircleShape {
     sf::Vector2f vector;
-    static const float speed = 0.2;
 
     void resetVector();
     void resetPosition();
 
 public:
     Point();
-    void move();
+    void move(const sf::Time &);
     void wallBounce();
 };
 

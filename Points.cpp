@@ -4,11 +4,6 @@
 
 #include "Points.h"
 
-Points::Points(unsigned int a) {
-    list = new std::vector<Point>(a);
-    list->shrink_to_fit();
-}
-
 void Points::drawPoints() {
     auto i = list->begin();
     do {
@@ -24,11 +19,11 @@ void Points::drawPoints() {
     } while (++i < list->end());
 }
 
-void Points::update() {
+void Points::update(const sf::Time &elapsed) {
     auto i = list->begin();
     do {
         i->wallBounce();
-        i->move();
+        i->move(elapsed);
     } while (++i < list->end());
 }
 
@@ -56,7 +51,9 @@ void Points::setWindow(sf::RenderWindow &window) {
     this->window = &window;
 }
 
-Points::Points(unsigned int a, sf::RenderWindow &window) : Points(a){
+Points::Points(unsigned int a, sf::RenderWindow &window){
     setWindow(window);
+    list = new std::vector<Point>(a);
+    list->shrink_to_fit();
 }
 

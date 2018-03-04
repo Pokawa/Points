@@ -12,13 +12,14 @@ void Point::resetVector() {
 }
 
 void Point::resetPosition() {
-    const auto x = rand() % int(WIDTH * 0.6) + 0.2 * WIDTH;
-    const auto y = rand() % int(HEIGHT * 0.6) + 0.2 * HEIGHT;
+    const auto x = float(rand() % int(WIDTH * 0.6) + 0.2 * WIDTH);
+    const auto y = float(rand() % int(HEIGHT * 0.6) + 0.2 * HEIGHT);
     setPosition(x, y);
 }
 
-void Point::move() {
+void Point::move(const sf::Time & elapsed) {
     sf::Vector2f position = getPosition();
+    const double speed = SPEED * (double)elapsed.asMilliseconds() / 1000;
     position.x += vector.x * speed;
     position.y += vector.y * speed;
     setPosition(position);

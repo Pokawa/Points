@@ -8,6 +8,7 @@
 #define HEIGHT 600
 #define POINTS 100
 #define MAX_DISTANCE 60
+#define SPEED 20
 //#define DISTANCE_FULL_OPA MAX_DISTANCE * 0.3
 
 #endif //TESTS_CONFIG_H

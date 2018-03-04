@@ -17,10 +17,9 @@ class Points {
     void drawLineBetween(sf::Vector2f, sf::Vector2f);
 
 public:
-    explicit Points(unsigned int a);
-    Points(unsigned int a, sf::RenderWindow &window);
-    void setWindow(sf::RenderWindow &window);
-    void update();
+    Points(unsigned int, sf::RenderWindow &);
+    void setWindow(sf::RenderWindow &);
+    void update(const sf::Time &);
     void drawPoints();
 
     ~Points();

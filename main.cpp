@@ -6,8 +6,13 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML");
+
     srand((unsigned)(time(nullptr)));
+
+    sf::Clock clock;
+    sf::Time elapsed = clock.restart();
     Points points(POINTS, window);
+
     while (window.isOpen())
     {
         sf::Event event{};
@@ -18,7 +23,8 @@ int main()
         }
 
         window.clear();
-        points.update();
+        elapsed = clock.restart();
+        points.update(elapsed);
         points.drawPoints();
         window.display();
     }
