@@ -42,7 +42,7 @@ void Points::drawLineBetween(sf::Vector2f a, sf::Vector2f b) {
     sf::Vertex vertex[2];
     vertex[0].position = a;
     vertex[1].position = b;
-    const auto alpha = sf::Uint8 (255 * (1. - dist/MAX_DISTANCE));
+    const auto alpha = sf::Uint8 ((dist < DISTANCE_OPA) ? 255 : 255 * (1 - (dist - DISTANCE_OPA)/(MAX_DISTANCE - DISTANCE_OPA)));
     vertex[0].color = vertex[1].color = sf::Color(255,255,255,alpha);
     window->draw(vertex, 2, sf::Lines);
 }
