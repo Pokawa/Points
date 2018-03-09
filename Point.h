@@ -10,13 +10,19 @@
 class Point : public sf::CircleShape {
     sf::Vector2f vector;
 
+    double distance;
+    sf::Vector2f runVector;
+
     void resetVector();
     void resetPosition();
+    const double move(const sf::Vector2f &, const double &);
+
 
 public:
     Point();
-    void move(const sf::Time &);
     void wallBounce();
+    void update(const sf::Time &);
+    void setRun(const sf::Vector2f &, const double &);
 };
 
 

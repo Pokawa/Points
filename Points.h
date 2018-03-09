@@ -13,14 +13,18 @@
 class Points {
     std::vector<Point> *list;
     sf::RenderWindow * window;
+    sf::Clock clock;
+    sf::Time elapsed;
 
-    void drawLineBetween(sf::Vector2f, sf::Vector2f);
+    void drawLineBetween(const sf::Vector2f &, const sf::Vector2f &);
+    const double distance(const sf::Vector2f &a, const sf::Vector2f &b);
 
 public:
     Points(unsigned int, sf::RenderWindow &);
     void setWindow(sf::RenderWindow &);
-    void update(const sf::Time &);
+    void update();
     void drawPoints();
+    void click(const sf::Vector2f &);
 
     ~Points();
 };

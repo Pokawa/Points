@@ -9,8 +9,6 @@ int main()
 
     srand((unsigned)(time(nullptr)));
 
-    sf::Clock clock;
-    sf::Time elapsed = clock.restart();
     Points points(POINTS, window);
 
     while (window.isOpen())
@@ -20,11 +18,20 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+
+            if (event.type == sf::Event::MouseButtonPressed)
+            {
+                if (event.mouseButton.button == sf::Mouse::Left)
+                {
+                    sf::Vector2f mouse(event.mouseButton.x, event.mouseButton.y);
+                    points.click(mouse);
+                }
+            }
+
         }
 
         window.clear();
-        elapsed = clock.restart();
-        points.update(elapsed);
+        points.update();
         points.drawPoints();
         window.display();
     }

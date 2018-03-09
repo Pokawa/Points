@@ -12,23 +12,24 @@ void Point::resetVector() {
 }
 
 void Point::resetPosition() {
-    const auto x = float(rand() % int(WIDTH * 0.6) + 0.2 * WIDTH);
-    const auto y = float(rand() % int(HEIGHT * 0.6) + 0.2 * HEIGHT);
+    const auto x = float(rand() % WIDTH);
+    const auto y = float(rand() % WIDTH);
     setPosition(x, y);
 }
 
-void Point::move(const sf::Time & elapsed) {
-    sf::Vector2f position = getPosition();
+void Point::update(const sf::Time & elapsed) {
     const double speed = SPEED * (double)elapsed.asMilliseconds() / 1000;
-    position.x += vector.x * speed;
-    position.y += vector.y * speed;
-    setPosition(position);
+    if (distance > 0)
+        distance -= move(runVector, speed * 5);
+    else
+        move(vector, speed);
 }
 
 Point::Point() : CircleShape(1) {
-    this->resetVector();
-    this->resetPosition();
+    resetVector();
+    resetPosition();
     setFillColor(sf::Color::White);
+    distance = 0;
 }
 
 void Point::wallBounce() {
@@ -45,6 +46,22 @@ void Point::wallBounce() {
 
     if (pos.y <= 0 && vector.y < 0)
         vector.y = -vector.y;
+}
+
+void Point::setRun(const sf::Vector2f &vector, const double &distance) {
+    this->distance = distance;
+    this->runVector = vector;
+}
+
+const double Point::move(const sf::Vector2f &vector, const double &speed)
+{
+    sf::Vector2f position = getPosition();
+    const double x = vector.x * speed;
+    const double y = vector.y * speed;
+    position.x += x;
+    position.y += y;
+    setPosition(position);
+    return sqrt(x * x + y * y);
 }
 
 
